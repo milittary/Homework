@@ -331,10 +331,19 @@ class Program
 
     static void ShowScore()
     {
-        AnsiConsole.MarkupLine(
-            $"[red bold]X: {scoreX}[/] | " +
-            $"[cyan bold]O: {scoreO}[/] | " +
-            $"[yellow bold]Нічиї: {draws}[/]\n");
+        var table = new Table()
+            .Border(TableBorder.Rounded)
+            .AddColumn("[red bold]X[/]")
+            .AddColumn("[cyan bold]O[/]")
+            .AddColumn("[yellow bold]Нічиї[/]");
+
+        table.AddRow(
+            scoreX.ToString(),
+            scoreO.ToString(),
+            draws.ToString());
+
+        AnsiConsole.Write(table);
+        AnsiConsole.WriteLine();
     }
 
     static string GetPlayerColor(char player)
